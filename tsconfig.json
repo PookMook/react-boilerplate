@@ -18,6 +18,9 @@
     "baseUrl": ".",
     "paths": {
       "data/*": ["./src/data/*"],
+      "styled": ["src/ui/stitches.config.ts"],
+      "ui/*": ["./src/ui/*"],
+      "types/*": ["./src/types"],
       "components/*": ["./src/components/*"],
       "~/*": ["./src/*"]
     }
