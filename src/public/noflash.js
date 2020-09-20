@@ -3,7 +3,7 @@
 
 (function () {
   // Change these if you use something different in your hook.
-  var storageKey = "darkMode";
+  var storageKey = "isDarkMode";
   var classNameDark = "theme-0";
   var classNameLight = "theme-default";
 
@@ -21,7 +21,7 @@
   } catch (err) {}
   var localStorageExists = localStorageTheme !== null;
   if (localStorageExists) {
-    localStorageTheme = JSON.parse(localStorageTheme);
+    localStorageTheme = JSON.parse(localStorageTheme) === "yes";
   }
 
   // Determine the source of truth

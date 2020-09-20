@@ -9,14 +9,16 @@ export function useDarkMode({
   darkModeClass: string;
   lightModeClass: string;
   storageKey?: string;
-  defaultValue?: boolean;
+  defaultValue?: boolean | null;
 }) {
   const defaultMode =
     typeof localStorage !== "object"
       ? defaultValue
       : localStorage.getItem(storageKey) === "yes"
       ? true
-      : false;
+      : localStorage.getItem(storageKey) === "no"
+      ? false
+      : defaultValue;
   const [isDarkMode, setDarkMode] = useState(defaultMode);
 
   useEffect(() => {

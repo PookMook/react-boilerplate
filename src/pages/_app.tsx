@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import type { AppProps } from "next/app";
 import { useDarkMode } from "hooks/index";
-import { css, darkTheme } from "styled";
+import { css, reset, darkTheme } from "styled";
+import { ToggleSwitch } from "components/toggle";
 
-css.global({
-  body: {
-    backgroundColor: "$background",
-  },
-});
+css.global(reset);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [mounted, setMounted] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode({
     lightModeClass: "light",
     darkModeClass: darkTheme,
+    defaultValue: null,
   });
 
-  // prevent showing anything before page is mounted (ie flash white/black screen)
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
+  if (isDarkMode === null) {
     return (
       <div style={{ visibility: "hidden" }}>
-        <header onClick={toggleDarkMode}>
-          Test {isDarkMode ? "DarkMode" : "LightMode"}
+        <header>
+          <ToggleSwitch onClick={toggleDarkMode} checked={!!isDarkMode} />
         </header>
         <Component {...pageProps} />
       </div>
@@ -34,25 +26,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-
-          @media (prefers-color-scheme: light){
-            margin:1rem;
-          }
-          body {
-            margin: 0;
-            color:var(--colors-main);
-            background-color: var(--colors-background);
-          }
-          
-          
-          `,
-        }}
-      />
-      <header onClick={toggleDarkMode}>
-        Test {isDarkMode ? "DarkMode" : "LightMode"}
+      <header>
+        <ToggleSwitch onClick={toggleDarkMode} checked={!!isDarkMode} />
       </header>
       <Component {...pageProps} />
     </>
