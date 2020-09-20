@@ -4,11 +4,16 @@ const CST = {
   primaryColor: "rgb(0,173,216)",
   primaryInverted: "white",
   destructive: "red",
-  lightColor: "rgb(179, 185, 200)",
-  mainColor: "rgb(87, 99, 114)",
-  blackColor: "rgb(52, 59, 68)",
+  lightColor: "#b3b9c8",
+  mainColor: "#576372",
+  blackColor: "#272c33",
+  lightColorInverted: "#373a4c",
+  mainColorInverted: "#8d9aa8",
+  blackColorInverted: "#cccfd8",
   backgroundColor: "#f8f9fd",
   backgroundHighlight: "white",
+  backgroundColorInverted: "#020407",
+  backgroundHighlightInverted: "black",
 };
 
 const { styled, css } = createStyled({
@@ -36,7 +41,6 @@ const { styled, css } = createStyled({
       xl: "1rem",
       xxl: "1.5rem",
     },
-
     fontSizes: {
       base: "16px",
       s: "0.75rem",
@@ -50,11 +54,17 @@ const { styled, css } = createStyled({
     sizes: {},
     borderWidths: {
       none: "0",
+      thin: "1px",
     },
     borderStyles: {
       solid: "solid",
     },
-    radii: {},
+    radii: {
+      none: "0",
+      normal: "7px",
+      half: "50%",
+      pill: "9999px",
+    },
     shadows: {},
     zIndices: {},
     transitions: {},
@@ -63,5 +73,21 @@ const { styled, css } = createStyled({
   utils: {},
 });
 
+const darkTheme = css.theme({
+  colors: {
+    $primary: CST.primaryColor,
+    $primaryText: CST.primaryInverted,
+    $constructive: CST.primaryColor,
+    $constructiveText: CST.primaryInverted,
+    $destructive: CST.destructive,
+    $destructiveText: CST.primaryInverted,
+    $main: CST.mainColorInverted,
+    $light: CST.lightColorInverted,
+    $black: CST.blackColorInverted,
+    $background: CST.backgroundColorInverted,
+    $backgroundHL: CST.backgroundHighlightInverted,
+  },
+});
+
 export default styled;
-export { styled, css };
+export { styled, css, darkTheme };

@@ -1,59 +1,64 @@
-import React from "react";
 import styled from "styled";
 
-const StyledButton = styled("button", {
+export const ButtonUI = styled("button", {
   color: "$main",
   backgroundColor: "$background",
-  borderWidth: "none",
+  outline: "0",
+  borderWidth: "thin",
+  borderStyle: "solid",
+  borderColor: "$background",
   padding: "m",
   cursor: "pointer",
+  borderRadius: "normal",
+  ":focus": {
+    borderColor: "$constructive",
+  },
   variants: {
+    radius: {
+      none: {
+        borderRadius: "none",
+      },
+      pill: { borderRadius: "pill" },
+    },
+    lined: {
+      true: {
+        borderColor: "$main",
+      },
+    },
     highlighted: {
       true: {
         backgroundColor: "$backgroundHL",
+        borderColor: "$backgroundHL",
+        color: "$black",
       },
     },
     constructive: {
       true: {
         color: "$constructiveText",
         backgroundColor: "$constructive",
+        borderColor: "$constructive",
+
+        ":focus": {
+          borderColor: "$constructiveText",
+        },
       },
     },
     destructive: {
       true: {
         color: "$destructiveText",
         backgroundColor: "$destructive",
+        borderColor: "$destructive",
+        ":focus": {
+          borderColor: "$destructiveText",
+        },
       },
     },
   },
 });
 
-type ButtonType =
-  | {
-      constructive: boolean;
-      destructive?: never;
-      highlighted?: never;
-    }
-  | {
-      constructive?: never;
-      highlighted?: never;
-      destructive: boolean;
-    }
-  | {
-      constructive?: never;
-      highlighted: boolean;
-      destructive?: never;
-    }
-  | {
-      constructive: undefined;
-      destructive: undefined;
-      highlighted: undefined;
-    };
-
-export function Button({ constructive, destructive, highlighted }: ButtonType) {
-  return (
-    <StyledButton type="button" {...{ constructive, destructive, highlighted }}>
-      Test
-    </StyledButton>
-  );
-}
+ButtonUI.compoundVariant(
+  { highlighted: true, lined: true },
+  {
+    borderColor: "$black",
+  }
+);

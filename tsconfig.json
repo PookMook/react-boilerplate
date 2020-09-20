@@ -20,6 +20,7 @@
       "data/*": ["./src/data/*"],
       "styled": ["src/ui/stitches.config.ts"],
       "ui/*": ["./src/ui/*"],
+      "hooks/*": ["./src/hooks/*"],
       "types/*": ["./src/types"],
       "components/*": ["./src/components/*"],
       "~/*": ["./src/*"]
