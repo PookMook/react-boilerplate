@@ -8,7 +8,6 @@ import NextDocument, {
 } from "next/document";
 import { css } from "styled";
 import noFlash from "!!raw-loader!~/helpers/noflash.js.txt";
-console.log(noFlash);
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Button, ToggleSwitch } from "components/index";
 import { ButtonUI } from "ui/index";
 import { useQuery, gql } from "@apollo/client";
@@ -16,21 +16,18 @@ export default function Main() {
 
   const { loading, error, data, refetch } = useQuery<GetHello>(HELLO_WORLD);
 
-  useEffect(() => {
-    refetch();
-  }, []);
-
   return (
     <main>
       <h1>Hello world</h1>
       <h2>test</h2>
       {loading && <p>loading...</p>}
       {error && <p>error...</p>}
-      <p>here is{JSON.stringify(data)}</p>
+      <p>here is: {data?.hello}</p>
       <ToggleSwitch
         checked={toggled}
         onClick={() => {
           setToggled(!toggled);
+          refetch();
         }}
       />
       <ButtonUI constructive css={buttonStyle}>
