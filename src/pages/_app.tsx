@@ -4,6 +4,9 @@ import { useDarkMode } from "hooks/index";
 import { css, reset, darkTheme } from "styled";
 import { ToggleSwitch } from "components/toggle";
 
+import { ApolloProvider } from "@apollo/client";
+import { client } from "~/graphql/client";
+
 css.global(reset);
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -13,24 +16,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     defaultValue: null,
   });
 
-  if (isDarkMode === null) {
-    return (
-      <div style={{ visibility: "hidden" }}>
-        <header>
-          <ToggleSwitch onClick={toggleDarkMode} checked={!!isDarkMode} />
-        </header>
-        <Component {...pageProps} />
-      </div>
-    );
-  }
-
   return (
-    <>
-      <header>
+    <div>
+      <header style={{ visibility: "initial" }}>
         <ToggleSwitch onClick={toggleDarkMode} checked={!!isDarkMode} />
       </header>
-      <Component {...pageProps} />
-    </>
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </div>
   );
 }
 

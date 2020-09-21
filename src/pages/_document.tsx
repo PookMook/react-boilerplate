@@ -7,6 +7,8 @@ import NextDocument, {
   DocumentContext,
 } from "next/document";
 import { css } from "styled";
+import noFlash from "!!raw-loader!~/helpers/noflash.js.txt";
+console.log(noFlash);
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
@@ -46,7 +48,7 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Head></Head>
         <body>
-          <script src="/noflash.js" />
+          <script dangerouslySetInnerHTML={{ __html: noFlash }} />
           <Main />
           <NextScript />
         </body>
